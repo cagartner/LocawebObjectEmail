@@ -5,7 +5,7 @@
  * Funciona tanto em Hospedagens Windows e Linux.
  *
  * @author Carlos Augusto Gartner <carlos@we3online.com.br>
- * @link 
+ * @link https://github.com/cagartner/LocawebObjectEmail
  * 
  */
 class Email {
@@ -17,7 +17,13 @@ class Email {
 	private $Assunto;
 	private $Mensagem;
 
-	private $EmailHost = "site@ficbic.com.br";
+	/**
+	 * Sempre atualizar esse campo com um e-mail válido do seu domínio da locaweb.	 * 
+	 * Sem ser um domínio válido não irá funcionar o envio do e-mail!
+	 * 
+	 * @var string
+	 */
+	private $EmailHost = "email@dominiodalocaweb.com.br";
 	private $Charset = 'utf-8';
 
 	private $Headers;
@@ -29,7 +35,9 @@ class Email {
 			$this->QuebraLinha = "\n"; //Se for Linux
 		} else if (PHP_OS == "WINNT") {
 			$this->QuebraLinha = "\r\n"; // Se for Win
-		} 
+		} else {
+			throw new Exception("Sistema operacional não suportado");			
+		}
 	}
 
 	public function getRemetente()
